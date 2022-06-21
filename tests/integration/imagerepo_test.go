@@ -40,6 +40,18 @@ func TestImageRepositoryScanAWS(t *testing.T) {
 	}
 }
 
+func TestImageRepositoryScanAzure(t *testing.T) {
+	if *targetProvider != "azure" {
+		t.SkipNow()
+	}
+
+	for name, repo := range testRepos {
+		t.Run(name, func(t *testing.T) {
+			testImageRepositoryScan(t, repo)
+		})
+	}
+}
+
 func testImageRepositoryScan(t *testing.T, repoURL string) {
 	g := NewWithT(t)
 	ctx := context.TODO()
